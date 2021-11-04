@@ -1,0 +1,308 @@
+{
+  "name": "rot",
+  "displayName": "Rot",
+  "description": "Visual Studio Code 插件",
+  "repository": "https://github.com/rothub/vscode",
+  "keywords": [
+    "插件"
+  ],
+  "version": "0.0.1",
+  "publisher": "hub",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:hub.pic"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "hub.pic",
+        "title": "Hub.Pic"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "hub.pic",
+        "key": "ctrl+alt+e",
+        "mac": "cmd+alt+e",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Rot",
+      "properties": {
+        "hub.pic.input": {
+          "type": "string",
+          "default": "${y}/${m}/${uuid}${ext}",
+          "markdownDescription": "上传名称格式.\n- `${uuid}`: UUID.\n- `${Y}`: 4 位年.\n- `${y}`: 2 位年.\n- `${m}`: 月.\n- `${d}`: 日.\n- `${h}`: 时.\n- `${i}`: 分.\n- `${s}`: 秒.\n- `${name}`: 文件名.\n- `${ext}`: 扩展名.\n\nExample: `${y}/${m}/${uuid}${ext}`\n"
+        },
+        "hub.pic.output": {
+          "type": "string",
+          "default": "![${dir}/${name}${ext}](${url})",
+          "markdownDescription": "返回名称格式.\n- `${dir}`: 路径.\n- `${name}`: 文件名.\n- `${ext}`: 扩展名.\n- `${url}`: URL.\n\nExample: `![${dir}/${name}${ext}](${url})`\n"
+        },
+        "hub.pic.bed.current": {
+          "type": "string",
+          "enum": [
+            "smms",
+            "aliyun",
+            "github",
+            "imgur",
+            "qiniu",
+            "tcyun",
+            "upyun",
+            "weibo"
+          ],
+          "default": "qiniu",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.smms.token": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.accessKeyId": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.accessKeySecret": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.bucket": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.area": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.aliyun.customUrl": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.github.repo": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.github.token": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.github.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.github.customUrl": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.github.branch": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.imgur.clientId": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.imgur.proxy": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.accessKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.secretKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.bucket": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.url": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.area": {
+          "type": "string",
+          "enum": [
+            "z0",
+            "z1",
+            "z2",
+            "na0",
+            "as0"
+          ],
+          "default": "z0",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.options": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.qiniu.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.version": {
+          "type": "string",
+          "enum": [
+            "v4",
+            "v5"
+          ],
+          "default": "v5",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.secretId": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.secretKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.bucket": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.appId": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.area": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.tcyun.customUrl": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.bucket": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.operator": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.password": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.options": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.upyun.url": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.weibo.chooseCookie": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.weibo.username": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.weibo.quality": {
+          "type": "string",
+          "enum": [
+            "thumbnail",
+            "mw690",
+            "large"
+          ],
+          "default": "large",
+          "markdownDescription": ""
+        },
+        "hub.pic.bed.weibo.cookie": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": ""
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/inquirer": "^8.1.3",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.9",
+    "@types/request-promise-native": "^1.0.18",
+    "@types/vscode": "^1.61.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "glob": "^7.2.0",
+    "mocha": "^9.1.2",
+    "typescript": "^4.4.4",
+    "vscode-test": "^1.6.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.7",
+    "emoji-regex": "^10.0.0",
+    "picgo": "^1.4.26",
+    "uuid": "^8.3.2"
+  }
+}
